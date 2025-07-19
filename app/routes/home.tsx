@@ -13,7 +13,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return <main className="bg-[url('/images/bg-main.svg')] bg-cover">
 	<Navbar />
-	<section className="main-section">
+	<section className="main-section py-16">
 		<div className="page-heading">
 			<h1>Track Your Applications & Resume Ratings</h1>
 			<h2>Review your submissions and check AI-powered feedback.</h2>
