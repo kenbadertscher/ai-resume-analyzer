@@ -6,6 +6,15 @@ import {useNavigate} from "react-router";
 import {convertPdfToImage} from "~/lib/pdf2img";
 import {generateUUID} from "~/lib/utils";
 import {prepareInstructions} from "../../constants";
+import { useAIProvider } from '~/lib/ai-provider';
+import OpenAI from "openai";
+
+let useOpenAI = true; // Set to true to use OpenAI, false for Puter
+
+const openaiKey = import.meta.env.VITE_OPENAI_API_KEY;
+const openai = openaiKey
+  ? new OpenAI({ apiKey: openaiKey, dangerouslyAllowBrowser: true })
+  : null;
 
 const Upload = () => {
     const { auth, isLoading, fs, ai, kv } = usePuterStore();
@@ -46,8 +55,8 @@ const Upload = () => {
 
         setStatusText('Analyzing...');
 
-        const feedback = await ai.feedback(
-            uploadedFile.path,
+        const { chat } = useAIProvider();
+        const feedback = await chat(
             prepareInstructions({ jobTitle, jobDescription })
         )
         if (!feedback) return setStatusText('Error: Failed to analyze resume');
