@@ -4,12 +4,3 @@
 # React Router
 /.react-router/
 /build/
-
-# Analysis files
-PUTER_DEPENDENCY_ANALYSIS.md
-
-# Environment variables
-.env
-.env.local
-.env.development
-.env.production
